@@ -1,19 +1,16 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
 import * as Yup from "yup";
 import clsx from "clsx";
-import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as auth from "../redux/AuthRedux";
 import { login } from "../redux/AuthCRUD";
-import { toAbsoluteUrl } from "../../../../_start/helpers";
+import { loginUser } from '../../../providers/AuthManage/actions'
+import { useAuthDispatch } from '../../../providers/AuthManage/context'
 
 const loginSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Wrong email format")
+  username: Yup.string()
     .min(3, "Minimum 3 symbols")
-    .max(50, "Maximum 50 symbols")
-    .required("Email is required"),
+    .required("Username is required"),
   password: Yup.string()
     .min(3, "Minimum 3 symbols")
     .max(50, "Maximum 50 symbols")
@@ -21,8 +18,8 @@ const loginSchema = Yup.object().shape({
 });
 
 const initialValues = {
-  email: "admin@demo.com",
-  password: "demo",
+  username: "",
+  password: "",
 };
 
 /*
@@ -33,17 +30,16 @@ const initialValues = {
 
 export function Login() {
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
+  const dispatchAuth = useAuthDispatch();
   const formik = useFormik({
     initialValues,
     validationSchema: loginSchema,
     onSubmit: (values, { setStatus, setSubmitting }) => {
       setLoading(true);
       setTimeout(() => {
-        login(values.email, values.password)
-          .then(({ data: { accessToken } }) => {
+        loginUser(dispatchAuth, { username: values.username, password: values.password})
+        .then(() => {
             setLoading(false);
-            dispatch(auth.actions.login(accessToken));
           })
           .catch(() => {
             setLoading(false);
@@ -64,19 +60,13 @@ export function Login() {
       {/* begin::Title */}
       <div className="pb-lg-15">
         <h3 className="fw-bolder text-dark display-6">Welcome to Start Property Manage</h3>
-        <div className="text-muted fw-bold fs-3">
-          New Here?{" "}
-          <Link
-            to="/auth/registration"
-            className="text-primary fw-bolder"
-            id="kt_login_signin_form_singup_button"
-          >
-            Create Account
-          </Link>
-        </div>
       </div>
       {/* begin::Title */}
-
+      {formik.status && (
+        <div className="mb-lg-15 alert alert-danger">
+          <div className="alert-text font-weight-bold">{formik.status}</div>
+        </div>)}
+{/* 
       {formik.status ? (
         <div className="mb-lg-15 alert alert-danger">
           <div className="alert-text font-weight-bold">{formik.status}</div>
@@ -88,28 +78,28 @@ export function Login() {
             <strong>demo</strong> to sign in.
           </div>
         </div>
-      )}
+      )} */}
 
       {/* begin::Form group */}
       <div className="v-row mb-10 fv-plugins-icon-container">
-        <label className="form-label fs-6 fw-bolder text-dark">Email</label>
+        <label className="form-label fs-6 fw-bolder text-dark">Username</label>
         <input
-          placeholder="Email"
-          {...formik.getFieldProps("email")}
+          placeholder="Username"
+          {...formik.getFieldProps("username")}
           className={clsx(
             "form-control form-control-lg form-control-solid",
-            { "is-invalid": formik.touched.email && formik.errors.email },
+            { "is-invalid": formik.touched.username && formik.errors.username },
             {
-              "is-valid": formik.touched.email && !formik.errors.email,
+              "is-valid": formik.touched.username && !formik.errors.username,
             }
           )}
-          type="email"
-          name="email"
+          type="text"
+          name="username"
           autoComplete="off"
         />
-        {formik.touched.email && formik.errors.email && (
+        {formik.touched.username && formik.errors.username && (
           <div className="fv-plugins-message-container">
-            <div className="fv-help-block">{formik.errors.email}</div>
+            <div className="fv-help-block">{formik.errors.username}</div>
           </div>
         )}
       </div>
@@ -121,17 +111,18 @@ export function Login() {
           <label className="form-label fs-6 fw-bolder text-dark pt-5">
             Password
           </label>
-
+{/* 
           <Link
             to="/auth/forgot-password"
             className="text-primary fs-6 fw-bolder text-hover-primary pt-5"
             id="kt_login_signin_form_password_reset_button"
           >
             Forgot Password ?
-          </Link>
+          </Link> */}
         </div>
         <input
           type="password"
+          placeholder="Password"
           autoComplete="off"
           {...formik.getFieldProps("password")}
           className={clsx(
@@ -168,7 +159,7 @@ export function Login() {
             </span>
           )}
         </button>
-        <button
+        {/* <button
           type="button"
           className="btn btn-light-primary fw-bolder px-8 py-4 my-3 fs-6 mr-3"
         >
@@ -178,7 +169,7 @@ export function Login() {
             alt=""
           />
           Sign in with Google
-        </button>
+        </button> */}
       </div>
       {/* end::Action */}
     </form>

@@ -24,20 +24,20 @@ export function AuthPage() {
           {/* Top */}
           <div className="d-flex flex-column-auto flex-column pt-lg-40 pt-15 text-center">
             {/* begin::Aside Logo */}
-            <Link to="/" className="mb-6">
+            {/* <Link to="/" className="mb-6">
               <img
                 alt="Logo"
                 src={toAbsoluteUrl("/media/logos/logo-default.svg")}
                 className="h-75px"
               />
-            </Link>
+            </Link> */}
             {/* end::Aside Logo */}
 
             {/* begin::Aside Subtitle */}
             <h3 className="fw-bolder fs-2x text-white lh-lg">
-              Discover Start
+              Manage each of
               <br />
-              with great build tools
+              your properties
             </h3>
             {/* end::Aside Subtitle */}
           </div>
@@ -47,7 +47,7 @@ export function AuthPage() {
             className="d-flex flex-row-fluid bgi-size-contain bgi-no-repeat bgi-position-y-bottom bgi-position-x-center min-h-350px"
             style={{
               backgroundImage: `url(${toAbsoluteUrl(
-                "/media/illustrations/winner.png"
+                "/media/illustrations/hosting.png"
               )})`,
             }}
           ></div>
@@ -64,7 +64,7 @@ export function AuthPage() {
               <Redirect to="/auth/login" />
             </Switch>
           </div>
-          <div className="d-flex justify-content-lg-start justify-content-center align-items-center py-7 py-lg-0">
+          {/* <div className="d-flex justify-content-lg-start justify-content-center align-items-center py-7 py-lg-0">
             <span className="text-primary fw-bolder fs-4 cursor-pointer">
               Terms
             </span>
@@ -72,7 +72,7 @@ export function AuthPage() {
             <span className="text-primary ms-10 fw-bolder fs-4">
               Contact Us
             </span>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
