@@ -1,15 +1,17 @@
-import React, { useEffect } from "react";
-import { Redirect, Route, Switch, Link } from "react-router-dom";
-import { Registration } from "./components/Registration";
-import { ForgotPassword } from "./components/ForgotPassword";
-import { Login } from "./components/Login";
-import { toAbsoluteUrl } from "../../../_start/helpers";
+import React, { useEffect } from 'react';
+import {
+  Redirect, Route, Switch, Link,
+} from 'react-router-dom';
+import { Registration } from './components/Registration';
+import { ForgotPassword } from './components/ForgotPassword';
+import { Login } from './components/Login';
+import { toAbsoluteUrl } from '../../../_start/helpers';
 
 export function AuthPage() {
   useEffect(() => {
-    document.body.classList.add("bg-white");
+    document.body.classList.add('bg-white');
     return () => {
-      document.body.classList.remove("bg-white");
+      document.body.classList.remove('bg-white');
     };
   }, []);
 
@@ -47,10 +49,10 @@ export function AuthPage() {
             className="d-flex flex-row-fluid bgi-size-contain bgi-no-repeat bgi-position-y-bottom bgi-position-x-center min-h-350px"
             style={{
               backgroundImage: `url(${toAbsoluteUrl(
-                "/media/illustrations/hosting.png"
+                '/media/illustrations/hosting.png',
               )})`,
             }}
-          ></div>
+          />
         </div>
 
         {/* Content */}
@@ -60,7 +62,7 @@ export function AuthPage() {
               <Route path="/auth/login" component={Login} />
               <Route path="/auth/registration" component={Registration} />
               <Route path="/auth/forgot-password" component={ForgotPassword} />
-              <Redirect from="/auth" exact={true} to="/auth/login" />
+              <Redirect from="/auth" exact to="/auth/login" />
               <Redirect to="/auth/login" />
             </Switch>
           </div>

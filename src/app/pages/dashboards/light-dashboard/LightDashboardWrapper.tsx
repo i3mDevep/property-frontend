@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import {
   IThemeConfig,
   useTheme,
   getConfig,
   PageTitle,
-} from "../../../../_start/layout/core";
-import { LightDashboardPage } from "./LightDashboardPage";
+} from '../../../../_start/layout/core';
+import { LightDashboardPage } from './LightDashboardPage';
 
 const defaultPageConfig = getConfig();
 const dashboardPageConfig: Partial<IThemeConfig> = {
@@ -16,7 +16,7 @@ const dashboardPageConfig: Partial<IThemeConfig> = {
     primaryDisplay: false,
     secondaryDisplay: true,
     toggle: false,
-    content: "menu",
+    content: 'menu',
   },
   toolbar: {
     ...defaultPageConfig.toolbar,

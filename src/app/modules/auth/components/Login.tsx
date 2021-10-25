@@ -1,25 +1,23 @@
-import { useState } from "react";
-import * as Yup from "yup";
-import clsx from "clsx";
-import { useFormik } from "formik";
-import * as auth from "../redux/AuthRedux";
-import { login } from "../redux/AuthCRUD";
-import { loginUser } from '../../../providers/AuthManage/actions'
-import { useAuthDispatch } from '../../../providers/AuthManage/context'
+import { useState } from 'react';
+import * as Yup from 'yup';
+import clsx from 'clsx';
+import { useFormik } from 'formik';
+import { loginUser } from '../../../providers/AuthManagement/actions';
+import { useAuthDispatch } from '../../../providers/AuthManagement/context';
 
 const loginSchema = Yup.object().shape({
   username: Yup.string()
-    .min(3, "Minimum 3 symbols")
-    .required("Username is required"),
+    .min(3, 'Minimum 3 symbols')
+    .required('Username is required'),
   password: Yup.string()
-    .min(3, "Minimum 3 symbols")
-    .max(50, "Maximum 50 symbols")
-    .required("Password is required"),
+    .min(3, 'Minimum 3 symbols')
+    .max(50, 'Maximum 50 symbols')
+    .required('Password is required'),
 });
 
 const initialValues = {
-  username: "",
-  password: "",
+  username: '',
+  password: '',
 };
 
 /*
@@ -34,19 +32,16 @@ export function Login() {
   const formik = useFormik({
     initialValues,
     validationSchema: loginSchema,
-    onSubmit: (values, { setStatus, setSubmitting }) => {
+    onSubmit: async (values, { setStatus, setSubmitting }) => {
       setLoading(true);
-      setTimeout(() => {
-        loginUser(dispatchAuth, { username: values.username, password: values.password})
-        .then(() => {
-            setLoading(false);
-          })
-          .catch(() => {
-            setLoading(false);
-            setSubmitting(false);
-            setStatus("The login detail is incorrect");
-          });
-      }, 1000);
+      try {
+        await loginUser(dispatchAuth, { username: values.username, password: values.password })
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        setSubmitting(false);
+        setStatus('The login detail is incorrect');
+      }
     },
   });
 
@@ -65,8 +60,9 @@ export function Login() {
       {formik.status && (
         <div className="mb-lg-15 alert alert-danger">
           <div className="alert-text font-weight-bold">{formik.status}</div>
-        </div>)}
-{/* 
+        </div>
+      )}
+      {/*
       {formik.status ? (
         <div className="mb-lg-15 alert alert-danger">
           <div className="alert-text font-weight-bold">{formik.status}</div>
@@ -85,13 +81,13 @@ export function Login() {
         <label className="form-label fs-6 fw-bolder text-dark">Username</label>
         <input
           placeholder="Username"
-          {...formik.getFieldProps("username")}
+          {...formik.getFieldProps('username')}
           className={clsx(
-            "form-control form-control-lg form-control-solid",
-            { "is-invalid": formik.touched.username && formik.errors.username },
+            'form-control form-control-lg form-control-solid',
+            { 'is-invalid': formik.touched.username && formik.errors.username },
             {
-              "is-valid": formik.touched.username && !formik.errors.username,
-            }
+              'is-valid': formik.touched.username && !formik.errors.username,
+            },
           )}
           type="text"
           name="username"
@@ -111,7 +107,7 @@ export function Login() {
           <label className="form-label fs-6 fw-bolder text-dark pt-5">
             Password
           </label>
-{/* 
+          {/*
           <Link
             to="/auth/forgot-password"
             className="text-primary fs-6 fw-bolder text-hover-primary pt-5"
@@ -124,15 +120,15 @@ export function Login() {
           type="password"
           placeholder="Password"
           autoComplete="off"
-          {...formik.getFieldProps("password")}
+          {...formik.getFieldProps('password')}
           className={clsx(
-            "form-control form-control-lg form-control-solid",
+            'form-control form-control-lg form-control-solid',
             {
-              "is-invalid": formik.touched.password && formik.errors.password,
+              'is-invalid': formik.touched.password && formik.errors.password,
             },
             {
-              "is-valid": formik.touched.password && !formik.errors.password,
-            }
+              'is-valid': formik.touched.password && !formik.errors.password,
+            },
           )}
         />
         {formik.touched.password && formik.errors.password && (
@@ -153,9 +149,10 @@ export function Login() {
         >
           {!loading && <span className="indicator-label">Sign In</span>}
           {loading && (
-            <span className="indicator-progress" style={{ display: "block" }}>
-              Please wait...{" "}
-              <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
+            <span className="indicator-progress" style={{ display: 'block' }}>
+              Please wait...
+              {' '}
+              <span className="spinner-border spinner-border-sm align-middle ms-2" />
             </span>
           )}
         </button>

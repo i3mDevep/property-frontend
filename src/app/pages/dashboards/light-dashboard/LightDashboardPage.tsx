@@ -1,6 +1,6 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
-import { KTSVG } from "../../../../_start/helpers";
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React, { useState } from 'react';
+import { KTSVG } from '../../../../_start/helpers';
 import {
   StatsWidget3,
   StatsWidget4,
@@ -10,8 +10,8 @@ import {
   StatsWidget8,
   StatsWidget9,
   TablesWidget2,
-} from "../../../../_start/partials/widgets";
-import { CreateAppModal } from "../_modals/create-app-stepper/CreateAppModal";
+} from '../../../../_start/partials/widgets';
+import { CreateAppModal } from '../_modals/create-app-stepper/CreateAppModal';
 
 export const LightDashboardPage: React.FC = () => {
   const [showCreateAppModal, setShowCreateAppModal] = useState(false);
@@ -41,7 +41,8 @@ export const LightDashboardPage: React.FC = () => {
               onClick={() => setShowCreateAppModal(true)}
               className="btn btn-primary btn-sm fw-bolder fs-6 ps-4 mt-6"
             >
-              Boost{" "}
+              Boost
+              {' '}
               <KTSVG
                 className="svg-icon-3 me-0"
                 path="/media/icons/duotone/Navigation/Up-right.svg"

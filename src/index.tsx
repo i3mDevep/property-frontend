@@ -1,16 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 // Redux
 // https://github.com/rt2zz/redux-persist
-import { PersistGate } from "redux-persist/integration/react";
-import { Provider } from "react-redux";
-import * as _redux from "./setup";
-import store, { persistor } from "./setup/redux/Store";
+import { PersistGate } from 'redux-persist/integration/react';
+import { Provider } from 'react-redux';
+import axios from 'axios';
+import * as _redux from './setup';
+import store, { persistor } from './setup/redux/Store';
 // Axios
-import axios from "axios";
 // Apps
-import { App } from "./app/App";
-import "./_start/assets/sass/style.scss";
+import { App } from './app/App';
+import './_start/assets/sass/style.scss';
 /**
  * Base URL of the website.
  *
@@ -39,5 +39,5 @@ ReactDOM.render(
       <App basename={PUBLIC_URL} />
     </PersistGate>
   </Provider>,
-  document.getElementById("root")
+  document.getElementById('root'),
 );

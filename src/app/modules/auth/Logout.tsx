@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { Redirect, Switch } from "react-router-dom";
-import * as auth from "./redux/AuthRedux";
+import { logout } from '../../providers/AuthManagement/actions';
+import { useAuthDispatch } from '../../providers/AuthManagement/context';
 
 export function Logout() {
-  const dispatch = useDispatch();
+  const dispatch = useAuthDispatch();
   useEffect(() => {
-    dispatch(auth.actions.logout());
+    logout(dispatch)
     document.location.reload();
   }, [dispatch]);
 

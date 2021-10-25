@@ -1,0 +1,6 @@
+node_modules/
+src/_start/
+src/app/modules/
+src/setup/
+src/app/pages/dashboards/
+build/

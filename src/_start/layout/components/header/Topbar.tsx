@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useAuthState } from "../../../../app/providers/AuthManagement/context";
 import { KTSVG } from "../../../helpers";
 import {
   HeaderNotificationsMenu,
@@ -9,6 +10,7 @@ import {
 import { useTheme } from "../../core";
 
 export function Topbar() {
+  const userState = useAuthState();
   const { config } = useTheme();
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [showInboxComposeModal, setShowInboxComposeModal] = useState(false);
@@ -60,7 +62,7 @@ export function Topbar() {
             className="svg-icon-1 svg-icon-dark"
           />
         </div>
-        <HeaderUserMenu />
+        <HeaderUserMenu name={userState?.auth.user} role={userState?.auth.groups[0]} />
         {/* end::Toggle */}
       </div>
       {/* end::User */}

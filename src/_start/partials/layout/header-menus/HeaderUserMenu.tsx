@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { KTSVG, toAbsoluteUrl } from "../../../helpers";
 
-export function HeaderUserMenu() {
+export function HeaderUserMenu({ name, role }: any) {
   return (
     <div
       className="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold w-300px"
@@ -26,9 +26,9 @@ export function HeaderUserMenu() {
           </span>
         </div>
         <div className="">
-          <span className="text-white fw-bolder fs-4">Hello, James</span>
+          <span className="text-white fw-bolder fs-4">Hello, {name}</span>
           <span className="text-white fw-bold fs-7 d-block">
-            CRM Product Designer
+            {role.toUpperCase()}
           </span>
         </div>
       </div>

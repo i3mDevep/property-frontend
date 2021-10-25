@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   EngageWidget5,
   ListsWidget1,
@@ -7,8 +7,8 @@ import {
   StatsWidget2,
   TablesWidget1,
   TablesWidget2,
-} from "../../../../_start/partials/widgets";
-import { CreateAppModal } from "../_modals/create-app-stepper/CreateAppModal";
+} from '../../../../_start/partials/widgets';
+import { CreateAppModal } from '../_modals/create-app-stepper/CreateAppModal';
 
 export const StartDashboardPage: React.FC = () => {
   const [show, setShow] = useState(false);
